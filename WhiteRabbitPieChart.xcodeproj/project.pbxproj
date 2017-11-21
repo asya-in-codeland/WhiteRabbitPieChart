@@ -12,6 +12,10 @@
 		22070A311FBB530500F43FC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22070A301FBB530500F43FC3 /* Assets.xcassets */; };
 		22070A341FBB530500F43FC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22070A321FBB530500F43FC3 /* LaunchScreen.storyboard */; };
 		22070A401FBB689C00F43FC3 /* WRPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22070A3F1FBB689C00F43FC3 /* WRPieChart.swift */; };
+		22AE060F1FC48F14001B8F41 /* WRPieChartSector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AE060E1FC48F14001B8F41 /* WRPieChartSector.swift */; };
+		22AE06111FC490B6001B8F41 /* WRSectorsLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AE06101FC490B6001B8F41 /* WRSectorsLayer.swift */; };
+		22AE06131FC49144001B8F41 /* WRDrawableSector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AE06121FC49144001B8F41 /* WRDrawableSector.swift */; };
+		22C67BBA1FC48DFC008BD7E0 /* WRPieChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C67BB91FC48DFC008BD7E0 /* WRPieChartDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		22070A331FBB530500F43FC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22070A351FBB530500F43FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22070A3F1FBB689C00F43FC3 /* WRPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WRPieChart.swift; sourceTree = "<group>"; };
+		22AE060E1FC48F14001B8F41 /* WRPieChartSector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WRPieChartSector.swift; sourceTree = "<group>"; };
+		22AE06101FC490B6001B8F41 /* WRSectorsLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WRSectorsLayer.swift; sourceTree = "<group>"; };
+		22AE06121FC49144001B8F41 /* WRDrawableSector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WRDrawableSector.swift; sourceTree = "<group>"; };
+		22C67BB91FC48DFC008BD7E0 /* WRPieChartDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WRPieChartDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +62,9 @@
 		22070A281FBB530500F43FC3 /* WhiteRabbitPieChart */ = {
 			isa = PBXGroup;
 			children = (
-				22070A411FBB68A700F43FC3 /* sections */,
+				22070A411FBB68A700F43FC3 /* sector */,
 				22070A3E1FBB53B200F43FC3 /* layers */,
-				22070A3D1FBB53AA00F43FC3 /* pieсhart */,
+				22070A3D1FBB53AA00F43FC3 /* piechart */,
 				22070A3C1FBB53A300F43FC3 /* utils */,
 				22070A3B1FBB538300F43FC3 /* categories */,
 				22070A291FBB530500F43FC3 /* AppDelegate.swift */,
@@ -82,26 +90,30 @@
 			path = utils;
 			sourceTree = "<group>";
 		};
-		22070A3D1FBB53AA00F43FC3 /* pieсhart */ = {
+		22070A3D1FBB53AA00F43FC3 /* piechart */ = {
 			isa = PBXGroup;
 			children = (
 				22070A3F1FBB689C00F43FC3 /* WRPieChart.swift */,
+				22C67BB91FC48DFC008BD7E0 /* WRPieChartDelegate.swift */,
 			);
-			path = "pieсhart";
+			path = piechart;
 			sourceTree = "<group>";
 		};
 		22070A3E1FBB53B200F43FC3 /* layers */ = {
 			isa = PBXGroup;
 			children = (
+				22AE06101FC490B6001B8F41 /* WRSectorsLayer.swift */,
 			);
 			path = layers;
 			sourceTree = "<group>";
 		};
-		22070A411FBB68A700F43FC3 /* sections */ = {
+		22070A411FBB68A700F43FC3 /* sector */ = {
 			isa = PBXGroup;
 			children = (
+				22AE060E1FC48F14001B8F41 /* WRPieChartSector.swift */,
+				22AE06121FC49144001B8F41 /* WRDrawableSector.swift */,
 			);
-			path = sections;
+			path = sector;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,9 +187,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22AE06131FC49144001B8F41 /* WRDrawableSector.swift in Sources */,
 				22070A401FBB689C00F43FC3 /* WRPieChart.swift in Sources */,
 				22070A2C1FBB530500F43FC3 /* ViewController.swift in Sources */,
+				22AE06111FC490B6001B8F41 /* WRSectorsLayer.swift in Sources */,
+				22AE060F1FC48F14001B8F41 /* WRPieChartSector.swift in Sources */,
 				22070A2A1FBB530500F43FC3 /* AppDelegate.swift in Sources */,
+				22C67BBA1FC48DFC008BD7E0 /* WRPieChartDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
