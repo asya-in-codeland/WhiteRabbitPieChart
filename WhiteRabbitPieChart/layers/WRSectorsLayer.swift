@@ -8,10 +8,12 @@
 
 import UIKit
 
-class WRSectorsLayer: CALayer {
+class WRSectorsLayer: CALayer, CAAnimationDelegate {
     
     @NSManaged var fillingCoefficient: CGFloat
-    var sectors: [WRDrawableSector] = []
+
+    private var sectors: [WRDrawableSector] = []
+    private var animationCompletion: (()->Void)?
     
     override init() {
         super.init()
@@ -29,6 +31,25 @@ class WRSectorsLayer: CALayer {
         super.init(coder: aDecoder)
     }
     
+    //MARK: - Public
+    
+    func update(sectors array: [WRDrawableSector]) {
+        //TODO: multiple call
+        
+        animationCompletion = {[unowned self] in
+            self.sectors = array
+            self.fillingCoefficient = 1.0
+        }
+        
+        if fillingCoefficient == 0.0 {
+            animationCompletion?()
+        }
+        else {
+            fillingCoefficient = 0.0
+        }
+        
+    }
+    
     //MARK: - Animation
     
     override class func needsDisplay(forKey key: String) -> Bool {
@@ -41,16 +62,24 @@ class WRSectorsLayer: CALayer {
             animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             animation.duration = 0.3
             animation.fromValue = self.presentation()?.fillingCoefficient
+            animation.delegate = self
             return animation
         }
         return super.action(forKey: event)
+    }
+    
+    //MARK: - CAAnimationDelegate
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        animationCompletion?()
+        animationCompletion = nil
     }
     
     //MARK: - Draw
     
     override func draw(in ctx: CGContext) {
         let pi = CGFloat(Double.pi)
-        let coefficient = self.presentation()?.fillingCoefficient ?? 0
+        let coefficient: CGFloat = self.presentation()?.fillingCoefficient ?? 0
         
         var startAngle = -pi/2.0
         var endAngle = startAngle
@@ -65,9 +94,13 @@ class WRSectorsLayer: CALayer {
     private func draw(sector:WRDrawableSector, from startAngle:CGFloat, to endAngle: CGFloat, in ctx: CGContext) {
         
         let radus = min(bounds.width * 0.5, bounds.height * 0.5)
+        let center = CGPoint(x: radus, y: radus)
         
         ctx.setFillColor(sector.backgroundColor.cgColor)
-        ctx.addArc(center: position, radius: radus, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+        ctx.move(to: center)
+        ctx.addLine(to: CGPoint(x: radus * cos(startAngle) + center.x, y: radus * sin(startAngle) + center.y))
+        ctx.addArc(center: center, radius: radus, startAngle: startAngle, endAngle: endAngle, clockwise: false)
+        ctx.addLine(to: center)
         ctx.fillPath()
         
         if sector.percent > 5.0 {
